@@ -11,3 +11,4 @@ conda install -n base conda-libmamba-solver
 conda config --set solver libmamba
 
 # vim
+cp .vimrc ~/.vimrc
