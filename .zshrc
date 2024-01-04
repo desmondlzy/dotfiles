@@ -115,9 +115,6 @@ source $ZSH/oh-my-zsh.sh
 
 alias dv="python ~/Projects/fsurf/dv.py"
 
-# ssh to Megamonster
-alias mm="ssh desmond@gcmsrv1"
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/miniconda/base/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
@@ -139,4 +136,3 @@ export PATH="/Users/zhliu/.local/bin:$PATH"
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 eval $(thefuck --alias)
-
