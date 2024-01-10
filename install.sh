@@ -10,6 +10,9 @@ fi
 rm -r ~/myconf-tmp
 alias config='/usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME'
 
+git config --global user.email "desmondzyliu@gmail.com"
+git config --global user.name "Desmond Liu"
+
 # oh my zsh
 # https://ohmyz.sh/
 sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
