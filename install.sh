@@ -1,9 +1,11 @@
 # homebrew
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+(echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/zhenyliu/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # recover the dotfiles
 # https://news.ycombinator.com/item?id=11071754
-git clone --separate-git-dir=$HOME/.myconf https://github.com/desmondlzy/.myconf $HOME/myconf-tmp
+git clone --separate-git-dir=$HOME/.myconf git@github.com/desmondlzy/.myconf.git $HOME/myconf-tmp
 if [ -f ~/myconf-tmp/.gitsubmodules ]; then
 	cp ~/myconf-tmp/.gitmodules ~
 fi
