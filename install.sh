@@ -26,5 +26,5 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 brew bundle --file Brewfile
 
 # conda
-conda install -n base conda-libmamba-solver
+conda install --yes -n base conda-libmamba-solver
 conda config --set solver libmamba
