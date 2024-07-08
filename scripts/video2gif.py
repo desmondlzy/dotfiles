@@ -7,6 +7,9 @@ import os
 import argparse 
 
 def video2gif(input_file, output_file, fps=10, scale=320, loop=0):
+    """
+    https://superuser.com/questions/556029/how-do-i-convert-a-video-to-gif-using-ffmpeg-with-reasonable-quality
+    """
     cmd = f'ffmpeg -i {input_file} -vf "fps={fps},scale={scale}:-1:flags=lanczos,split[s0][s1];[s0]palettegen[p];[s1][p]paletteuse" -loop {loop} {output_file}'
     os.system(cmd)
 
