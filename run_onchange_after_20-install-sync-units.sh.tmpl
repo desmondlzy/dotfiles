@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Re-run this script whenever these unit files change:
+# timer:  {{ include ".config/systemd/user/agent-skills-sync.timer" | sha256sum }}
+# service:{{ include ".config/systemd/user/agent-skills-sync.service" | sha256sum }}
+# plist:  {{ include "Library/LaunchAgents/com.agentskills.sync.plist.tmpl" | sha256sum }}
+
+{{ if eq .chezmoi.os "linux" -}}
+if command -v systemctl >/dev/null 2>&1; then
+  systemctl --user daemon-reload || true
+  systemctl --user enable --now agent-skills-sync.timer
+  echo "install-sync-units: enabled systemd timer"
+else
+  echo "install-sync-units: no systemctl (not a systemd host) — skipping" >&2
+fi
+{{ else if eq .chezmoi.os "darwin" -}}
+mkdir -p "$HOME/.local/state"
+PLIST="$HOME/Library/LaunchAgents/com.agentskills.sync.plist"
+launchctl unload "$PLIST" 2>/dev/null || true
+launchctl load "$PLIST"
+echo "install-sync-units: loaded launchd agent"
+{{ end -}}

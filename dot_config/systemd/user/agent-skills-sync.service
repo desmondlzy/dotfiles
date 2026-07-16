@@ -1,0 +1,6 @@
+[Unit]
+Description=Sync agent-skills repo (fast-forward only)
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/skills-sync

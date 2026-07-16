@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# Fast-forward the agent-skills clone. Safe to run anytime, from anywhere.
+# Backs off (never clobbers) if you have local edits or a diverged branch.
+set -euo pipefail
+
+REPO="${AGENT_SKILLS_DIR:-$HOME/src/agent-skills}"
+
+if [ ! -d "$REPO/.git" ]; then
+  echo "skills-sync: no git clone at $REPO" >&2
+  echo "  clone it first, or set AGENT_SKILLS_DIR" >&2
+  exit 1
+fi
+
+git -C "$REPO" fetch --quiet origin
+
+# --ff-only refuses to merge if you have local commits; that's the point.
+if git -C "$REPO" merge --ff-only --quiet '@{u}' 2>/dev/null; then
+  echo "skills-sync: $REPO @ $(git -C "$REPO" rev-parse --short HEAD)"
+else
+  echo "skills-sync: local changes or divergence in $REPO — leaving it alone" >&2
+fi

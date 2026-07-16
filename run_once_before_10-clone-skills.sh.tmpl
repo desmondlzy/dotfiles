@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+REPO="$HOME/src/agent-skills"
+URL={{ .skillsRepo | quote }}
+
+if [ -d "$REPO/.git" ]; then
+  echo "clone-skills: already present at $REPO"
+  exit 0
+fi
+
+if [ -z "$URL" ] || [ "$URL" = '""' ]; then
+  echo "clone-skills: skillsRepo is empty — run 'chezmoi init' to set it" >&2
+  exit 1
+fi
+
+mkdir -p "$(dirname "$REPO")"
+git clone "$URL" "$REPO"
+echo "clone-skills: cloned into $REPO"
